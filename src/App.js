@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PropTypes from 'prop-types';
+import { NavLink, Switch, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import PostList from './components/PostList';
+import PostPage from './components/PostPage';
+import NewPost from './components/NewPost';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <NavLink
+                to="/"
+                exact
+              >
+                Home
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/posts">
+                Posts
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/newpost">
+                New post
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
+
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/posts/:postId" component={PostPage} />
+        <Route path="/posts" component={PostList} />
+        <Route path="/newpost" component={NewPost} />
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
